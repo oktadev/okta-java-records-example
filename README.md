@@ -31,7 +31,7 @@ okta apps create
 ```
 You will be prompted to select the following options:
 
-- Application name: search-service
+- Application name: java-records
 - Type of Application: Web
 - Type of Application: Okta Spring Boot Starter
 - Redirect URI: Default
