@@ -1,0 +1,15 @@
+okta:
+  oauth2:
+    issuer: https://{yourOktaDoman}/oauth2/default
+    client-secret: {clientSecret}
+    client-id: {clientId}
+
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: fortnite
+
+logging:
+  level:
+    org.springframework.data.mongodb: TRACE
