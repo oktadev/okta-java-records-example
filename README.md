@@ -16,7 +16,7 @@ git clone https://github.com/indiepopart/java-records.git
 ## Configure Okta Authentication
 
 ```shell
-cd java-recods
+cd java-records
 ```
 
 With OktaCLI, register for a free developer account:
