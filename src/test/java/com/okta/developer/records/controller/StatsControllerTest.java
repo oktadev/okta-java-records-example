@@ -1,50 +1,35 @@
 package com.okta.developer.records.controller;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import com.okta.developer.records.domain.EndOfGame;
+import com.okta.developer.records.domain.MentalStateDamage;
+import com.okta.developer.records.service.StatsService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.testcontainers.containers.Container;
-import org.testcontainers.containers.MongoDBContainer;
-import org.testcontainers.utility.DockerImageName;
-import org.testcontainers.utility.MountableFile;
+import reactor.core.publisher.Flux;
 
-import java.io.IOException;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.mockOidcLogin;
 
-@SpringBootTest
-@AutoConfigureWebTestClient
+@WebFluxTest
 public class StatsControllerTest {
 
     private static Logger logger = LoggerFactory.getLogger(StatsControllerTest.class);
 
+    @MockBean
+    private StatsService statsService;
+
     @Autowired
     private WebTestClient webTestClient;
-
-    private static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:bionic"))
-            .withExposedPorts(27017)
-            .withCopyFileToContainer(MountableFile.forClasspathResource("stats.json"),
-                    "/stats.json")
-            .withEnv("MONGO_INIT_DATABASE", "fortnite");
-
-    @BeforeAll
-    public static void setUp() throws IOException, InterruptedException {
-        mongoDBContainer.setPortBindings(List.of("27017:27017"));
-        mongoDBContainer.start();
-
-        Container.ExecResult result = mongoDBContainer.execInContainer("mongoimport",
-                "--verbose", "--db=fortnite", "--collection=stats", "--file=/stats.json", "--jsonArray");
-        logger.info(result.getStdout());
-        logger.info(result.getStderr());
-        logger.info("exit code={}", result.getExitCode());
-    }
 
     @Test
     public void testGet_noAuth_returnsNotAuthorized(){
@@ -58,14 +43,19 @@ public class StatsControllerTest {
     @Test
     public void testGet_withOidcLogin_returnsOk(){
 
+        EndOfGame endOfGame = new EndOfGame("1", LocalDate.now(), LocalTime.now(), "happy", 1, 1, 1);
+
+        given(statsService.getAll()).willReturn(Flux.just(endOfGame));
+
+
         webTestClient.mutateWith(mockOidcLogin())
                 .get().uri("/endOfGame")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
                     .jsonPath("$.length()").isNumber()
-                    .jsonPath("$.length()").isEqualTo("87")
-                    .jsonPath("$[0].mentalState").isNotEmpty()
+                    .jsonPath("$.length()").isEqualTo("1")
+                    .jsonPath("$[0].mentalState").isEqualTo("happy")
                     .jsonPath("$[0].damageTaken").isNumber()
                     .jsonPath("$[0].damageToPlayers").isNumber()
                     .jsonPath("$[0].damageToStructures").isNumber()
@@ -77,19 +67,20 @@ public class StatsControllerTest {
 
     @Test
     public void testGetMentalStateAverageDamage_withOidcLogin_returnsOk(){
+
+        MentalStateDamage mentalStateDamage = new MentalStateDamage("happy", 0.0, 0.0, 0.0);
+
+        given(statsService.queryMentalStateAverageDamage()).willReturn(Flux.just(mentalStateDamage));
+
         webTestClient
                 .mutateWith(mockOidcLogin())
                 .get().uri("/mentalStateAverageDamage")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBody()
-                .jsonPath("$.length()").isEqualTo("2")
+                .jsonPath("$.length()").isEqualTo("1")
+                .jsonPath("$.[0].mentalState").isEqualTo("happy")
                 .consumeWith(response -> logger.info(response.toString()));
-    }
-
-    @AfterAll
-    public static void tearDown(){
-        mongoDBContainer.stop();
     }
 
 }

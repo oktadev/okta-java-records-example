@@ -2,7 +2,7 @@ package com.okta.developer.records.controller;
 
 import com.okta.developer.records.domain.EndOfGame;
 import com.okta.developer.records.domain.MentalStateDamage;
-import com.okta.developer.records.repository.StatsRepository;
+import com.okta.developer.records.service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,16 +12,16 @@ import reactor.core.publisher.Flux;
 public class StatsController {
 
     @Autowired
-    private StatsRepository statsRepository;
+    private StatsService statsService;
 
     @GetMapping("/endOfGame")
     public Flux<EndOfGame> getAllEndOfGame(){
-        return statsRepository.findAll();
+        return statsService.getAll();
     }
 
     @GetMapping("/mentalStateAverageDamage")
     public Flux<MentalStateDamage> getMentalStateAverageDamage(){
-        return statsRepository.queryMentalStateAverageDamage();
+        return statsService.queryMentalStateAverageDamage();
     }
 
 }

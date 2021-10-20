@@ -9,12 +9,12 @@ import reactor.core.publisher.Flux;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
-public class DefaultMentalStateStatsRepository implements MentalStateStatsRepository {
+public class MentalStateStatsRepositoryImpl implements MentalStateStatsRepository {
 
     private final ReactiveMongoTemplate mongoTemplate;
 
     @Autowired
-    public DefaultMentalStateStatsRepository(ReactiveMongoTemplate mongoTemplate) {
+    public MentalStateStatsRepositoryImpl(ReactiveMongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }
 
