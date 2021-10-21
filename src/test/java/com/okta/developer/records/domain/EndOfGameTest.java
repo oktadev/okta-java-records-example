@@ -15,7 +15,7 @@ public class EndOfGameTest {
 
     private static final Logger logger = LoggerFactory.getLogger(EndOfGameTest.class);
 
-    private EndOfGame getTestEndOfGame(){
+    private EndOfGame getTestEndOfGame() {
 
         return new EndOfGame("1", LocalDate.of(2018, 12, 12),
                 LocalTime.of(15, 15), "sober",
@@ -23,7 +23,7 @@ public class EndOfGameTest {
     }
 
     @Test
-    public void equalsTest(){
+    public void equalsTest() {
         EndOfGame eog1 = getTestEndOfGame();
         EndOfGame eog2 = getTestEndOfGame();
 
@@ -33,7 +33,7 @@ public class EndOfGameTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         EndOfGame eog = getTestEndOfGame();
         logger.info(eog.toString());
 
@@ -43,7 +43,7 @@ public class EndOfGameTest {
     }
 
     @Test
-    public void accessorTest(){
+    public void accessorTest() {
         EndOfGame eog = getTestEndOfGame();
         assertEquals("sober", eog.mentalState());
     }

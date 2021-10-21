@@ -12,7 +12,6 @@ public record EndOfGame(String id, LocalDate date, LocalTime timeOfDay,
                         Integer damageToPlayers, Integer damageToStructures) {
 
     public EndOfGame {
-        Objects.requireNonNull(id);
         Objects.requireNonNull(date);
         Objects.requireNonNull(timeOfDay);
         Objects.requireNonNull(mentalState);
