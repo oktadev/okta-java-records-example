@@ -1,8 +1,8 @@
 okta:
   oauth2:
     issuer: https://{yourOktaDoman}/oauth2/default
-    client-secret: {clientSecret}
     client-id: {clientId}
+    client-secret: {clientSecret}
 
 spring:
   data:
