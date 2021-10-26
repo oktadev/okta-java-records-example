@@ -1,6 +1,5 @@
 package com.okta.developer.records.domain;
 
-
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +14,7 @@ public class EndOfGameTest {
 
     private static final Logger logger = LoggerFactory.getLogger(EndOfGameTest.class);
 
-    private EndOfGame getTestEndOfGame() {
+    private EndOfGame createEndOfGame() {
 
         return new EndOfGame("1", LocalDate.of(2018, 12, 12),
                 LocalTime.of(15, 15), "sober",
@@ -24,8 +23,8 @@ public class EndOfGameTest {
 
     @Test
     public void equalsTest() {
-        EndOfGame eog1 = getTestEndOfGame();
-        EndOfGame eog2 = getTestEndOfGame();
+        EndOfGame eog1 = createEndOfGame();
+        EndOfGame eog2 = createEndOfGame();
 
         assertTrue(eog1.equals(eog2));
         assertEquals(eog1, eog2);
@@ -34,7 +33,7 @@ public class EndOfGameTest {
 
     @Test
     public void toStringTest() {
-        EndOfGame eog = getTestEndOfGame();
+        EndOfGame eog = createEndOfGame();
         logger.info(eog.toString());
 
         assertEquals("EndOfGame[id=1, date=2018-12-12, timeOfDay=15:15, mentalState=sober, " +
@@ -44,7 +43,7 @@ public class EndOfGameTest {
 
     @Test
     public void accessorTest() {
-        EndOfGame eog = getTestEndOfGame();
+        EndOfGame eog = createEndOfGame();
         assertEquals("sober", eog.mentalState());
     }
 
