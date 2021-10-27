@@ -67,8 +67,8 @@ public class StatsRepositoryTest {
 
         assertThat(result).isNotEmpty();
         assertThat(result).size().isEqualTo(2);
-        assertThat(result.get(0).mentalState()).isEqualTo("sober");
-        assertThat(result.get(1).mentalState()).isEqualTo("high");
+        assertThat(result.get(0).mentalState()).isIn("sober", "high");
+        assertThat(result.get(1).mentalState()).isIn("sober", "high");
 
         logger.info(result.get(0).toString());
         logger.info(result.get(1).toString());

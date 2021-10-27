@@ -2,25 +2,21 @@ package com.okta.developer.records.configuration;
 
 import com.okta.developer.records.repository.LocalDateConverter;
 import com.okta.developer.records.repository.LocalTimeConverter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
+import java.util.Arrays;
+
 @Configuration
-public class MongoConfiguration extends AbstractReactiveMongoConfiguration {
+public class MongoConfiguration {
 
-    @Value("${spring.data.mongodb.database}")
-    private String databaseName;
+    @Bean
+    public MongoCustomConversions mongoCustomConversions() {
 
-    @Override
-    protected String getDatabaseName() {
-        return databaseName;
-    }
-
-    @Override
-    protected void configureConverters(MongoCustomConversions.MongoConverterConfigurationAdapter adapter) {
-        adapter.registerConverter(new LocalDateConverter());
-        adapter.registerConverter(new LocalTimeConverter());
+        return new MongoCustomConversions(
+            Arrays.asList(
+                    new LocalDateConverter(),
+                    new LocalTimeConverter()));
     }
 }

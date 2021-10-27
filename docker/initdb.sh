@@ -1,0 +1,1 @@
+mongoimport --verbose --db=fortnite --collection=stats --file=/seed/stats.json --jsonArray
