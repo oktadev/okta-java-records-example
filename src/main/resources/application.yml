@@ -1,13 +1,14 @@
 okta:
   oauth2:
-    issuer: https://{yourOktaDoman}/oauth2/default
-    client-secret: {clientSecret}
+    issuer: https://{yourOktaDomain}/oauth2/default
     client-id: {clientId}
+    client-secret: {clientSecret}
 
 spring:
   data:
     mongodb:
-      uri: "mongodb://localhost/fortnite"
+      port: 27017
+      database: fortnite
 
 logging:
   level:
