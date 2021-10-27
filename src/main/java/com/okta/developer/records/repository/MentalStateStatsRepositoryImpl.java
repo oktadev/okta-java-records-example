@@ -27,7 +27,7 @@ public class MentalStateStatsRepositoryImpl implements MentalStateStatsRepositor
                         .avg("damageTaken").as("damageTaken")
                         .avg("damageToStructures").as("damageToStructures"),
                 project("mentalState", "damageToPlayers", "damageTaken", "damageToStructures")
-                );
+        );
         return mongoTemplate.aggregate(aggregation, EndOfGame.class, MentalStateDamage.class);
     }
 
