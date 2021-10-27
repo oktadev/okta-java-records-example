@@ -9,7 +9,7 @@ services:
       - "27017:27017"
     volumes:
       - ../src/test/resources/stats.json:/seed/stats.json
-      - ./initdb.sh:/seed/initdb.sh
+      - ./initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
   demo:
     image: records-demo:0.0.1-SNAPSHOT
     ports:
