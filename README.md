@@ -1,6 +1,6 @@
 # Tutorial: Java Records - A WebFlux and Spring Data example
 
-This repository contains all the code for the WebClient tutorial, illustrating how to mock authorization and how to do integration testing for code that uses WebClient for accessing third-party services.
+This repository contains all the code for the Java Records tutorial, illustrating how records can be used for building REST APIs and database queries. 
 
 **Prerequisites**:
 - [Java 14+](https://openjdk.java.net/install/index.html)
@@ -10,7 +10,8 @@ This repository contains all the code for the WebClient tutorial, illustrating h
 
 ## Getting started
 
-To install this example, run the following commands:
+To install this example, first clone this repository:
+
 ```bash
 git clone https://github.com/indiepopart/java-records.git
 ```
@@ -48,13 +49,6 @@ okta:
     client-id: {clientId}
     client-secret: {clientSecret}
 ```
-
-## Build and run the application tests
-
-```shell
-./mvnw clean install
-```
-
 
 ## Run with Docker Compose
 
