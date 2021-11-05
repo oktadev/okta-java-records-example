@@ -58,6 +58,12 @@ okta:
 
 ## Run with Docker Compose
 
+In the project root, generate the application container image with the following Maven command:
+
+```shell
+./mvnw spring-boot:build-image
+```
+
 Go to the docker folder and run the services with Docker Compose:
 
 ```shell
