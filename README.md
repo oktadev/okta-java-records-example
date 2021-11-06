@@ -1,8 +1,8 @@
 # Java Records - A WebFlux and Spring Data Example
 
-This repository contains all the code for the Java Records tutorial, illustrating how records can be used for building REST APIs and database queries.
+This repository contains all the code for our Java Records tutorial, illustrating how records can be used for building REST APIs and database queries.
 
-This repository contains the completed code for [Java Records: A WebFlux and Spring Data Example](http://developer.okta.com/blog/2021/11/05/java-records). Please read the blog post to see how it was created.
+Please read [Java Records: A WebFlux and Spring Data Example](http://developer.okta.com/blog/2021/11/05/java-records) to see how it was created.
 
 **Prerequisites**:
 
@@ -55,7 +55,7 @@ You will be prompted to select the following options:
 
 The Okta CLI will create the client application and configure the issuer, clientId and clientSecret in `src/main/resources/application.properties`. Update the `issuer`, `client-id` and `client-secret` in `application.yml`. Delete `application.properties`.
 
-```yml
+```yaml
 okta:
   oauth2:
     issuer: https://{yourOktaDomain}/oauth2/default
