@@ -1,5 +1,7 @@
 # Java Records - A WebFlux and Spring Data Example
 
+This repository contains all the code for the Java Records tutorial, illustrating how records can be used for building REST APIs and database queries.
+
 This repository contains the completed code for [Java Records: A WebFlux and Spring Data Example](http://developer.okta.com/blog/2021/11/05/java-records). Please read the blog post to see how it was created.
 
 **Prerequisites**:
@@ -17,21 +19,21 @@ This repository contains the completed code for [Java Records: A WebFlux and Spr
 * [Help](#help)
 * [License](#license)
 
-## Getting Started
+## Getting started
 
-To install this example, run the following commands:
+To install this example, first clone this repository:
 
 ```bash
 git clone https://github.com/oktadev/okta-java-records-example.git
 ```
 
-## Configure Okta Authentication
+## Configure Okta authentication
 
 ```shell
 cd java-records
 ```
 
-With Okta CLI, register for a free developer account:
+Using the Okta CLI, register for a free developer account:
 
 ```shell
 okta register
@@ -61,10 +63,39 @@ okta:
     client-secret: {clientSecret}
 ```
 
-## Build and Run the Application Tests
+## Run with Docker Compose
+
+In the project root, generate the application container image with the following Maven command:
 
 ```shell
-./mvnw verify
+./mvnw spring-boot:build-image
+```
+
+Go to the docker folder and run the services with Docker Compose:
+
+```shell
+cd docker
+docker-compose up
+```
+
+Once the services are up, go to `http://localhost:8080/mentalStateAverageDamage`, and you should see the Okta login page. Sign in with your Okta credentials, and if successful, it will redirect to the /mentalStateAverageDamage endpoint, and you should see a response body like the following:
+
+
+```json
+[
+   {
+      "mentalState":"sober",
+      "damageToPlayers":604.3777777777777,
+      "damageToStructures":3373.511111111111,
+      "damageTaken":246.46666666666667
+   },
+   {
+      "mentalState":"high",
+      "damageToPlayers":557.547619047619,
+      "damageToStructures":2953.8571428571427,
+      "damageTaken":241.71428571428572
+   }
+]
 ```
 
 ## Links
@@ -79,7 +110,7 @@ This example uses the following open source libraries:
 
 ## Help
 
-Please post any questions as comments on the [blog post](http://developer.okta.com/blog/2021/11/05/java-records), or visit our [Okta Developer Forums](https://devforum.okta.com/). 
+Please post any questions as comments on the [blog post](http://developer.okta.com/blog/2021/11/05/java-records), or visit our [Okta Developer Forums](https://devforum.okta.com/).
 
 ## License
 
